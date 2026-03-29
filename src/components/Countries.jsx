@@ -5,7 +5,8 @@ import './countries.css'
 const Countries = () => {
 
     const [countries, setCountries] = useState([]);
-    const [visitedCountries, setVisitedCountries] = useState([])
+    const [visitedCountries, setVisitedCountries] = useState([]);
+    // const [visitedFlags, setVisitedFlags] = useState([]);
 
     useEffect(() => {
         fetch('https://studies.cs.helsinki.fi/restcountries/api/all')
@@ -15,16 +16,23 @@ const Countries = () => {
 
     const handleVisitedCountry = country =>{
          console.log('sdd this visited country');
-         console.log(country)
+         const newVisitedCountries = [...visitedCountries, country];
+         setVisitedCountries(newVisitedCountries);
     }
+
+    // const handleVisitedFlags = flag => {
+    //     console.log('flag adding');
+    // }
 
     return (
         <div>
             <h3>Countries : {countries.length}</h3>
             <div>
-                <h4>Visited Countries</h4>
+                <h4>Visited Countries : {visitedCountries.length}</h4>
                 <ul>
-
+                    {
+                        visitedCountries.map(country =><li key = {country.cca3}>{country.name.common}</li>)
+                    }
                 </ul>
             </div>
             <div className="country-container">
